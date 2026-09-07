@@ -292,6 +292,20 @@ img, svg { max-width: 100%; display: block; }
   min-width: 0;
 }
 
+/* real photo container — replaces .photo-slot once an image is available */
+.photo-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--ink);
+}
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* full-bleed hero variant: adds a scrim so headline text stays legible even
    once a real photo is dropped in */
 .hero-photo {
@@ -506,8 +520,11 @@ img, svg { max-width: 100%; display: block; }
 /* --------------------------------------- founder cards --------------------- */
 .founders-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 28px;
+}
+@media (max-width: 640px) {
+  .founders-grid { grid-template-columns: 1fr; }
 }
 .founder-card {
   display: flex;
