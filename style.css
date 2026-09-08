@@ -541,6 +541,7 @@ img, svg { max-width: 100%; display: block; }
 }
 @media (max-width: 640px) {
   .founders-grid { grid-template-columns: 1fr; }
+  .stat-grid { grid-template-columns: 1fr; }
 }
 .founder-card {
   display: flex;
