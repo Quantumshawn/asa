@@ -81,51 +81,7 @@
     </div>
   </section>
 
-  <section class="section section--paper reveal" id="signup">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="kicker">Sign up</span>
-        <h2>Tell us you're interested</h2>
-        <p>Takes about 30 seconds. We'll follow up before the next meeting.</p>
-      </div>
-      <form class="signup-form" id="signup-form" novalidate>
-        <div class="form-row form-row-split">
-          <div>
-            <label class="form-label" for="su-name">Name</label>
-            <input class="form-input" type="text" id="su-name" name="name" autocomplete="name" required>
-          </div>
-          <div>
-            <label class="form-label" for="su-grade">Grade</label>
-            <select class="form-select" id="su-grade" name="grade" required>
-              <option value="" disabled selected>Select one</option>
-              <option value="9">9th</option>
-              <option value="10">10th</option>
-              <option value="11">11th</option>
-              <option value="12">12th</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <label class="form-label" for="su-email">Email</label>
-          <input class="form-input" type="email" id="su-email" name="email" autocomplete="email" required>
-        </div>
-        <div class="form-row">
-          <label class="form-label" for="su-message">Anything you want us to know? <span style="text-transform:none;">(optional)</span></label>
-          <textarea class="form-textarea" id="su-message" name="message"></textarea>
-        </div>
-        <div class="form-honeypot" aria-hidden="true">
-          <label for="su-company">Leave this blank</label>
-          <input type="text" id="su-company" name="company" tabindex="-1" autocomplete="off">
-        </div>
-        <div class="form-row">
-          <button class="form-submit" type="submit">Sign me up</button>
-        </div>
-        <div class="form-status" id="signup-status" role="status"></div>
-      </form>
-    </div>
-  </section>
-
-  <section class="section reveal">
+  <section class="section section--paper reveal">
     <div class="wrap">
       <div class="section-head">
         <span class="kicker">FAQ</span>
@@ -160,17 +116,48 @@
     </div>
   </section>
 
-  <section class="cta-band cta-band--ink reveal">
+  <section class="section reveal" id="signup">
     <div class="wrap">
-      <div class="cta-band-inner">
-      <div>
-        <h2>Try it out once! See if it's for you.</h2>
-        <p>No commitment required.</p>
+      <div class="section-head">
+        <span class="kicker">Sign up</span>
+        <h2>Try it out. Tell us you're interested.</h2>
+        <p>Takes about 30 seconds, no commitment required. We'll follow up before the next meeting.</p>
       </div>
-      <div class="hero-actions" style="margin-top:0;">
-        <a class="btn btn-ghost" href="mailto:hello@mayoasa.com">Email us</a>
-      </div>
-      </div>
+      <form class="signup-form" id="signup-form" novalidate>
+        <div class="form-row form-row-split">
+          <div>
+            <label class="form-label" for="su-name">Name</label>
+            <input class="form-input" type="text" id="su-name" name="name" autocomplete="name" required>
+          </div>
+          <div>
+            <label class="form-label" for="su-grade">Grade</label>
+            <select class="form-select" id="su-grade" name="grade" required>
+              <option value="" disabled selected>Select one</option>
+              <option value="9">9th</option>
+              <option value="10">10th</option>
+              <option value="11">11th</option>
+              <option value="12">12th</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="su-studentid">Student ID</label>
+          <input class="form-input" type="text" id="su-studentid" name="studentId" inputmode="numeric" autocomplete="off" placeholder="e.g. 1234567" required>
+          <p class="form-hint">That's how Rochester Schools email works — yours is studentid@rochesterschools.org.</p>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="su-message">Anything you want us to know? <span style="text-transform:none;">(optional)</span></label>
+          <textarea class="form-textarea" id="su-message" name="message"></textarea>
+        </div>
+        <div class="form-honeypot" aria-hidden="true">
+          <label for="su-company">Leave this blank</label>
+          <input type="text" id="su-company" name="company" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="form-row">
+          <button class="form-submit" type="submit">Sign me up</button>
+        </div>
+        <div class="form-status" id="signup-status" role="status"></div>
+      </form>
     </div>
   </section>
 
@@ -236,14 +223,14 @@
     var data = {
       name: form.name.value.trim(),
       grade: form.grade.value,
-      email: form.email.value.trim(),
+      studentId: form.studentId.value.trim(),
       message: form.message.value.trim(),
       company: form.company.value
     };
 
-    if (!data.name || !data.grade || !data.email) {
+    if (!data.name || !data.grade || !data.studentId) {
       status.className = 'form-status is-error';
-      status.textContent = 'Please fill out your name, grade, and email.';
+      status.textContent = 'Please fill out your name, grade, and student ID.';
       return;
     }
 

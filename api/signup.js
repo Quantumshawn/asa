@@ -19,7 +19,7 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  const { name, grade, email, message, company } = req.body || {};
+  const { name, grade, studentId, message, company } = req.body || {};
 
   // honeypot: bots fill hidden fields, real users never see them
   if (company) {
@@ -27,7 +27,7 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  if (!name || !grade || !email) {
+  if (!name || !grade || !studentId) {
     res.status(400).json({ error: "Missing required fields" });
     return;
   }
@@ -38,18 +38,20 @@ module.exports = async function handler(req, res) {
     return;
   }
 
+  const studentEmail = studentId.replace(/\s+/g, "") + "@rochesterschools.org";
+
   const text =
     "New Mayo ASA sign-up\n\n" +
     "Name: " + name + "\n" +
     "Grade: " + grade + "\n" +
-    "Email: " + email + "\n\n" +
+    "Student ID: " + studentId + " (" + studentEmail + ")\n\n" +
     "Message:\n" + (message || "(none)");
 
   const html =
     "<h2>New Mayo ASA sign-up</h2>" +
     "<p><strong>Name:</strong> " + escapeHtml(name) + "<br>" +
     "<strong>Grade:</strong> " + escapeHtml(grade) + "<br>" +
-    "<strong>Email:</strong> " + escapeHtml(email) + "</p>" +
+    "<strong>Student ID:</strong> " + escapeHtml(studentId) + " (" + escapeHtml(studentEmail) + ")</p>" +
     "<p><strong>Message:</strong><br>" + escapeHtml(message || "(none)").replace(/\n/g, "<br>") + "</p>";
 
   try {
@@ -62,7 +64,7 @@ module.exports = async function handler(req, res) {
       body: JSON.stringify({
         from: "Mayo ASA Sign-Ups <onboarding@resend.dev>",
         to: RECIPIENTS,
-        reply_to: email,
+        reply_to: studentEmail,
         subject: "New Mayo ASA sign-up: " + name,
         text: text,
         html: html
