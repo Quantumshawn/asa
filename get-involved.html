@@ -75,13 +75,57 @@
           <dt>Email</dt>
           <dd><a href="mailto:hello@mayoasa.com">hello@mayoasa.com</a></dd>
           <dt>Sign up</dt>
-          <dd>Interest form link <span class="editnote">edit me</span></dd>
+          <dd><a href="#signup">Fill out the form below ↓</a></dd>
         </dl>
       </div>
     </div>
   </section>
 
-  <section class="section section--paper reveal">
+  <section class="section section--paper reveal" id="signup">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Sign up</span>
+        <h2>Tell us you're interested</h2>
+        <p>Takes about 30 seconds. We'll follow up before the next meeting.</p>
+      </div>
+      <form class="signup-form" id="signup-form" novalidate>
+        <div class="form-row form-row-split">
+          <div>
+            <label class="form-label" for="su-name">Name</label>
+            <input class="form-input" type="text" id="su-name" name="name" autocomplete="name" required>
+          </div>
+          <div>
+            <label class="form-label" for="su-grade">Grade</label>
+            <select class="form-select" id="su-grade" name="grade" required>
+              <option value="" disabled selected>Select one</option>
+              <option value="9">9th</option>
+              <option value="10">10th</option>
+              <option value="11">11th</option>
+              <option value="12">12th</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="su-email">Email</label>
+          <input class="form-input" type="email" id="su-email" name="email" autocomplete="email" required>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="su-message">Anything you want us to know? <span style="text-transform:none;">(optional)</span></label>
+          <textarea class="form-textarea" id="su-message" name="message"></textarea>
+        </div>
+        <div class="form-honeypot" aria-hidden="true">
+          <label for="su-company">Leave this blank</label>
+          <input type="text" id="su-company" name="company" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="form-row">
+          <button class="form-submit" type="submit">Sign me up</button>
+        </div>
+        <div class="form-status" id="signup-status" role="status"></div>
+      </form>
+    </div>
+  </section>
+
+  <section class="section reveal">
     <div class="wrap">
       <div class="section-head">
         <span class="kicker">FAQ</span>
@@ -177,5 +221,59 @@
 </footer>
 
 <script src="script.js"></script>
+<script>
+(function () {
+  var form = document.getElementById('signup-form');
+  if (!form) return;
+  var status = document.getElementById('signup-status');
+  var submitBtn = form.querySelector('.form-submit');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    status.className = 'form-status';
+    status.textContent = '';
+
+    var data = {
+      name: form.name.value.trim(),
+      grade: form.grade.value,
+      email: form.email.value.trim(),
+      message: form.message.value.trim(),
+      company: form.company.value
+    };
+
+    if (!data.name || !data.grade || !data.email) {
+      status.className = 'form-status is-error';
+      status.textContent = 'Please fill out your name, grade, and email.';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    fetch('/api/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(function (res) {
+        if (!res.ok) throw new Error('Request failed');
+        return res.json();
+      })
+      .then(function () {
+        status.className = 'form-status is-success';
+        status.textContent = "You're in! We'll be in touch before the next meeting.";
+        form.reset();
+      })
+      .catch(function () {
+        status.className = 'form-status is-error';
+        status.textContent = 'Something went wrong. Try again, or just email us at hello@mayoasa.com.';
+      })
+      .finally(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Sign me up';
+      });
+  });
+})();
+</script>
 </body>
 </html>
