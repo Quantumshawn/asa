@@ -62,7 +62,7 @@ module.exports = async function handler(req, res) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        from: "Mayo ASA Sign-Ups <onboarding@resend.dev>",
+        from: "Mayo ASA Sign-Ups <signups@mayoasa.com>",
         to: RECIPIENTS,
         reply_to: studentEmail,
         subject: "New Mayo ASA sign-up: " + name,
