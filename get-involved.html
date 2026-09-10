@@ -91,9 +91,15 @@
       <form class="signup-form" id="signup-form" novalidate>
         <div class="form-row form-row-split">
           <div>
-            <label class="form-label" for="su-name">Name</label>
-            <input class="form-input" type="text" id="su-name" name="name" autocomplete="name" required>
+            <label class="form-label" for="su-first-name">First name</label>
+            <input class="form-input" type="text" id="su-first-name" name="firstName" autocomplete="given-name" required>
           </div>
+          <div>
+            <label class="form-label" for="su-last-name">Last name</label>
+            <input class="form-input" type="text" id="su-last-name" name="lastName" autocomplete="family-name" required>
+          </div>
+        </div>
+        <div class="form-row form-row-split">
           <div>
             <label class="form-label" for="su-grade">Grade</label>
             <select class="form-select" id="su-grade" name="grade" required>
@@ -104,10 +110,10 @@
               <option value="12">12th</option>
             </select>
           </div>
-        </div>
-        <div class="form-row">
-          <label class="form-label" for="su-studentid">Student ID</label>
-          <input class="form-input" type="text" id="su-studentid" name="studentId" inputmode="numeric" autocomplete="off" required>
+          <div>
+            <label class="form-label" for="su-studentid">Student ID</label>
+            <input class="form-input" type="text" id="su-studentid" name="studentId" inputmode="numeric" autocomplete="off" required>
+          </div>
         </div>
         <div class="form-row">
           <label class="form-label" for="su-message">Anything you want us to know? <span style="text-transform:none;">(optional)</span></label>
@@ -220,14 +226,15 @@
     status.textContent = '';
 
     var data = {
-      name: form.name.value.trim(),
+      firstName: form.firstName.value.trim(),
+      lastName: form.lastName.value.trim(),
       grade: form.grade.value,
       studentId: form.studentId.value.trim(),
       message: form.message.value.trim(),
       company: form.company.value
     };
 
-    if (!data.name || !data.grade || !data.studentId) {
+    if (!data.firstName || !data.lastName || !data.grade || !data.studentId) {
       status.className = 'form-status is-error';
       status.textContent = 'Please fill out your name, grade, and student ID.';
       return;

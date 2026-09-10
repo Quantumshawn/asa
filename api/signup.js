@@ -38,7 +38,7 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  const { name, grade, studentId, message, company } = req.body || {};
+  const { firstName, lastName, grade, studentId, message, company } = req.body || {};
 
   // honeypot: bots fill hidden fields, real users never see them
   if (company) {
@@ -46,7 +46,7 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  if (!name || !grade || !studentId) {
+  if (!firstName || !lastName || !grade || !studentId) {
     res.status(400).json({ error: "Missing required fields" });
     return;
   }
@@ -57,20 +57,20 @@ module.exports = async function handler(req, res) {
     return;
   }
 
+  const fullName = firstName + " " + lastName;
   const studentEmail = studentId.replace(/\s+/g, "") + "@rochesterschools.org";
-  const firstName = name.trim().split(/\s+/)[0];
 
   // 1) notify the officer team - this one has to succeed for the request to count as OK
   const officerText =
     "New Mayo ASA sign-up\n\n" +
-    "Name: " + name + "\n" +
+    "Name: " + fullName + "\n" +
     "Grade: " + grade + "\n" +
     "Student ID: " + studentId + " (" + studentEmail + ")\n\n" +
     "Message:\n" + (message || "(none)");
 
   const officerHtml =
     "<h2>New Mayo ASA sign-up</h2>" +
-    "<p><strong>Name:</strong> " + escapeHtml(name) + "<br>" +
+    "<p><strong>Name:</strong> " + escapeHtml(fullName) + "<br>" +
     "<strong>Grade:</strong> " + escapeHtml(grade) + "<br>" +
     "<strong>Student ID:</strong> " + escapeHtml(studentId) + " (" + escapeHtml(studentEmail) + ")</p>" +
     "<p><strong>Message:</strong><br>" + escapeHtml(message || "(none)").replace(/\n/g, "<br>") + "</p>";
@@ -80,7 +80,7 @@ module.exports = async function handler(req, res) {
       from: "Mayo ASA Sign-Ups <signups@mayoasa.com>",
       to: RECIPIENTS,
       reply_to: studentEmail,
-      subject: "New Mayo ASA sign-up: " + name,
+      subject: "New Mayo ASA sign-up: " + fullName,
       text: officerText,
       html: officerHtml
     });
@@ -100,15 +100,15 @@ module.exports = async function handler(req, res) {
       text:
         "Hey " + firstName + ",\n\n" +
         "Thanks for signing up for Mayo ASA! Here's our Google Classroom, join it so you don't miss anything:\n" +
-        CLASSROOM_LINK + "\n" +
+        CLASSROOM_LINK + "\n\n" +
         "(or use class code " + CLASSROOM_CODE + " if the link doesn't work)\n\n" +
         "We meet Fridays, 4:30-5:30 PM in Room 2131. Come by whenever!\n\n" +
         "See you soon,\nAsian Student Alliance",
       html:
         "<p>Hey " + escapeHtml(firstName) + ",</p>" +
         "<p>Thanks for signing up for Mayo ASA! Here's our Google Classroom, join it so you don't miss anything:<br>" +
-        "<a href=\"" + escapeHtml(CLASSROOM_LINK) + "\">" + escapeHtml(CLASSROOM_LINK) + "</a><br>" +
-        "(or use class code <strong>" + escapeHtml(CLASSROOM_CODE) + "</strong> if the link doesn't work)</p>" +
+        "<a href=\"" + escapeHtml(CLASSROOM_LINK) + "\">" + escapeHtml(CLASSROOM_LINK) + "</a></p>" +
+        "<p>(or use class code <strong>" + escapeHtml(CLASSROOM_CODE) + "</strong> if the link doesn't work)</p>" +
         "<p>We meet Fridays, 4:30&ndash;5:30 PM in Room 2131. Come by whenever!</p>" +
         "<p>See you soon,<br>Asian Student Alliance</p>"
     });
