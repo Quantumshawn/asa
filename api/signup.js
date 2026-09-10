@@ -77,7 +77,7 @@ module.exports = async function handler(req, res) {
 
   try {
     await sendEmail({
-      from: "Mayo ASA Sign-Ups <signups@mayoasa.com>",
+      from: "Mayo ASA Sign-Ups <hello@mayoasa.com>",
       to: RECIPIENTS,
       reply_to: studentEmail,
       subject: "New Mayo ASA sign-up: " + fullName,
