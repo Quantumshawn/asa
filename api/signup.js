@@ -96,21 +96,21 @@ module.exports = async function handler(req, res) {
     await sendEmail({
       from: "Mayo ASA <hello@mayoasa.com>",
       to: [studentEmail],
-      subject: "Welcome to Mayo ASA!",
+      subject: "Welcome to the Mayo Asian Student Alliance!",
       text:
         "Hey " + firstName + ",\n\n" +
-        "Thanks for signing up for Mayo ASA! Here's our Google Classroom, join it so you don't miss anything:\n" +
+        "Thanks for signing up for ASA! Here's our Google Classroom, join it so you don't miss anything:\n" +
         CLASSROOM_LINK + "\n\n" +
         "(or use class code " + CLASSROOM_CODE + " if the link doesn't work)\n\n" +
         "We meet Fridays, 4:30-5:30 PM in Room 2131. Come by whenever!\n\n" +
-        "See you soon,\nAsian Student Alliance",
+        "See you soon,\nASA",
       html:
         "<p>Hey " + escapeHtml(firstName) + ",</p>" +
         "<p>Thanks for signing up for Mayo ASA! Here's our Google Classroom, join it so you don't miss anything:<br>" +
         "<a href=\"" + escapeHtml(CLASSROOM_LINK) + "\">" + escapeHtml(CLASSROOM_LINK) + "</a></p>" +
         "<p>(or use class code <strong>" + escapeHtml(CLASSROOM_CODE) + "</strong> if the link doesn't work)</p>" +
         "<p>We meet Fridays, 4:30&ndash;5:30 PM in Room 2131. Come by whenever!</p>" +
-        "<p>See you soon,<br>Asian Student Alliance</p>"
+        "<p>See you soon,<br>ASA</p>"
     });
   } catch (err) {
     console.error("Student welcome email failed (non-fatal):", err);
