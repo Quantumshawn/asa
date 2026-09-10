@@ -102,7 +102,7 @@ module.exports = async function handler(req, res) {
         "Thanks for signing up for Mayo ASA! Here's our Google Classroom, join it so you don't miss anything:\n" +
         CLASSROOM_LINK + "\n" +
         "(or use class code " + CLASSROOM_CODE + " if the link doesn't work)\n\n" +
-        "We meet Fridays, 4:30-5:30 PM in Room 2131. Come by whenever, no commitment needed.\n\n" +
+        "We meet Fridays, 4:30-5:30 PM in Room 2131. Come by whenever!\n\n" +
         "See you soon,\nMayo ASA",
       html:
         "<p>Hey " + escapeHtml(firstName) + ",</p>" +
