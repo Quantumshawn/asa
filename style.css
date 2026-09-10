@@ -803,10 +803,18 @@ img, svg { max-width: 100%; display: block; }
     background: var(--white);
     border-bottom: 1px solid var(--line);
     box-shadow: 0 12px 20px -14px rgba(23,21,15,0.3);
-    display: none;
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    pointer-events: none;
+    transition: grid-template-rows 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease;
   }
-  .site-nav.is-open { display: block; }
-  .site-nav ul { flex-direction: column; padding: 8px 24px 16px; }
+  .site-nav.is-open {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .site-nav ul { flex-direction: column; padding: 8px 24px 16px; overflow: hidden; min-height: 0; }
   .site-nav a { display: block; padding: 12px 4px; }
   .hero { min-height: 74vh; }
   .cta-band-inner { flex-direction: column; align-items: flex-start; }
