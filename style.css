@@ -180,12 +180,17 @@ img, svg { max-width: 100%; display: block; }
   height: 2px;
   background: var(--ink);
   position: relative;
-  transition: transform 0.2s ease;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, opacity 0.2s ease;
 }
 .nav-toggle span::before,
 .nav-toggle span::after { content: ""; position: absolute; }
 .nav-toggle span::before { top: -6px; }
 .nav-toggle span::after { top: 6px; }
+
+/* morph the hamburger into an X while the menu is open */
+.nav-toggle[aria-expanded="true"] span { background: transparent; }
+.nav-toggle[aria-expanded="true"] span::before { top: 0; transform: rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span::after { top: 0; transform: rotate(-45deg); }
 
 .nav-row { display: flex; align-items: center; gap: 20px; }
 .site-nav ul {
