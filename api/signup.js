@@ -1,6 +1,7 @@
-// TEMP: testing with one recipient only - restore the full list below before real use
+// TEMP: testing with a couple recipients only - restore the full list below before real use
 const RECIPIENTS = [
-  "1005588@rochesterschools.org"
+  "1005588@rochesterschools.org",
+  "1002958@rochesterschools.org"
   // "9487701@rochesterschools.org",
   // "9487601@rochesterschools.org",
   // "9495101@rochesterschools.org",
