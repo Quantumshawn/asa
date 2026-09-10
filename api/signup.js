@@ -1,10 +1,11 @@
+// TEMP: testing with one recipient only - restore the full list below before real use
 const RECIPIENTS = [
-  "1005588@rochesterschools.org",
-  "9487701@rochesterschools.org",
-  "9487601@rochesterschools.org",
-  "9495101@rochesterschools.org",
-  "9421601@rochesterschools.org",
-  "9465501@rochesterschools.org"
+  "1005588@rochesterschools.org"
+  // "9487701@rochesterschools.org",
+  // "9487601@rochesterschools.org",
+  // "9495101@rochesterschools.org",
+  // "9421601@rochesterschools.org",
+  // "9465501@rochesterschools.org"
 ];
 
 function escapeHtml(str) {
