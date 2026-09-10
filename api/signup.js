@@ -8,8 +8,8 @@ const RECIPIENTS = [
   // "9465501@rochesterschools.org"
 ];
 
-// TODO: replace with the real Google Classroom join link/code
-const CLASSROOM_LINK = "PASTE_CLASSROOM_LINK_HERE";
+const CLASSROOM_LINK = "https://classroom.google.com/c/ODcyNjUzNDMzODA2?cjc=7yhxbhob";
+const CLASSROOM_CODE = "7yhxbhob";
 
 function escapeHtml(str) {
   return String(str).replace(/[&<>"']/g, function (c) {
@@ -100,13 +100,15 @@ module.exports = async function handler(req, res) {
       text:
         "Hey " + firstName + ",\n\n" +
         "Thanks for signing up for Mayo ASA! Here's our Google Classroom, join it so you don't miss anything:\n" +
-        CLASSROOM_LINK + "\n\n" +
+        CLASSROOM_LINK + "\n" +
+        "(or use class code " + CLASSROOM_CODE + " if the link doesn't work)\n\n" +
         "We meet Fridays, 4:30-5:30 PM in Room 2131. Come by whenever, no commitment needed.\n\n" +
         "See you soon,\nMayo ASA",
       html:
         "<p>Hey " + escapeHtml(firstName) + ",</p>" +
         "<p>Thanks for signing up for Mayo ASA! Here's our Google Classroom, join it so you don't miss anything:<br>" +
-        "<a href=\"" + escapeHtml(CLASSROOM_LINK) + "\">" + escapeHtml(CLASSROOM_LINK) + "</a></p>" +
+        "<a href=\"" + escapeHtml(CLASSROOM_LINK) + "\">" + escapeHtml(CLASSROOM_LINK) + "</a><br>" +
+        "(or use class code <strong>" + escapeHtml(CLASSROOM_CODE) + "</strong> if the link doesn't work)</p>" +
         "<p>We meet Fridays, 4:30&ndash;5:30 PM in Room 2131. Come by whenever, no commitment needed.</p>" +
         "<p>See you soon,<br>Mayo ASA</p>"
     });
