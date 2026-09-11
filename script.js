@@ -2,6 +2,24 @@
 // 1) mobile nav toggle  2) header shadow on scroll  3) scroll-reveal
 
 document.addEventListener("DOMContentLoaded", function () {
+  var donateBanner = document.getElementById("donate-banner");
+  if (donateBanner) {
+    var dismissKey = "masa-donate-banner-nepal-2026-dismissed";
+    var dismissed = false;
+    try { dismissed = localStorage.getItem(dismissKey) === "1"; } catch (e) {}
+    if (dismissed) {
+      donateBanner.hidden = true;
+    } else {
+      var closeBtn = donateBanner.querySelector(".donate-banner-close");
+      if (closeBtn) {
+        closeBtn.addEventListener("click", function () {
+          donateBanner.hidden = true;
+          try { localStorage.setItem(dismissKey, "1"); } catch (e) {}
+        });
+      }
+    }
+  }
+
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.querySelector(".site-nav");
 
