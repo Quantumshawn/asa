@@ -119,6 +119,32 @@ img, svg { max-width: 100%; display: block; }
 .tag--gold { color: var(--gold-dark); }
 .tag--global { color: var(--gold-dark); }
 
+/* ------------------------------------ donate banner ----------------------- */
+.donate-banner { background: var(--brick); color: var(--white); }
+.donate-banner-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 10px 24px;
+  text-align: center;
+}
+.donate-banner p { margin: 0; font-size: 0.92rem; }
+.donate-banner a { color: var(--white); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+.donate-banner-close {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+  flex-shrink: 0;
+}
+@media (max-width: 640px) {
+  .donate-banner-inner { flex-wrap: wrap; padding: 10px 16px; }
+}
+
 /* ------------------------------------ masthead / nav --------------------- */
 .masthead {
   background: var(--white);
