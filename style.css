@@ -35,6 +35,8 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+/* keep in-page jumps (like #founders) from landing under the sticky header */
+section[id] { scroll-margin-top: 68px; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
